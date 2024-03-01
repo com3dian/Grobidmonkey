@@ -2,9 +2,9 @@
 
 The grobidmonkey package is an open-source package designed for postprocessing [GROBID](https://grobid.readthedocs.io/en/latest/) outputs.
 
-- Website: 
+- Website: https://github.com/com3dian/Grobidmonkey
 
-- Documentation:
+- Documentation: 
 
 - Source code:
 
