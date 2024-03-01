@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: grobidmonkey
+Version: 0.0.1
+Summary: A python package for processing grobid output.
+Author-email: Zehao Lu <com3dian@outlook.com>
+Project-URL: Homepage, https://github.com/com3dian/grobidmonkey
+Project-URL: Issues, https://github.com/com3dian/grobidmonkey/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+
+
+This is a simple example package. You can use
+[GitHub-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
+to write your content.

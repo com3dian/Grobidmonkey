@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/grobidmonkey/__init__.py
+src/grobidmonkey/reader.py
+src/grobidmonkey/utils.py
+src/grobidmonkey.egg-info/PKG-INFO
+src/grobidmonkey.egg-info/SOURCES.txt
+src/grobidmonkey.egg-info/dependency_links.txt
+src/grobidmonkey.egg-info/top_level.txt
+src/grobidmonkey/methods/lxmlmethod.py
+src/grobidmonkey/methods/monkeymethod.py
+src/grobidmonkey/methods/x2dmethod.py
+tests/testMethods.py
+tests/testUtils.py
