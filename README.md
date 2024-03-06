@@ -1,5 +1,6 @@
 
 [![Python](https://img.shields.io/pypi/pyversions/Grobidmonkey)](https://pypi.org/project/grobidmonkey/)
+![Static Badge](https://img.shields.io/badge/package-grobidmonkey-2D9596)
 [![PyPI](https://badge.fury.io/py/grobidmonkey.svg)](https://badge.fury.io/py/grobidmonkey)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/com3dian/Grobidmonkey)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/grobidmonkey.svg?label=Pypi%20downloads)](https://pypi.org/project/grobidmonkey/)
@@ -9,7 +10,7 @@ The grobidmonkey package is an open-source package designed for postprocessing [
 
 - Website: https://github.com/com3dian/Grobidmonkey
 
-- Documentation: https://github.com/com3dian/Grobidmonkey/tree/dev-0.0.3/Document
+- Documentation: https://github.com/com3dian/Grobidmonkey/Document
 
 - Source code: https://github.com/com3dian/Grobidmonkey/src
 
@@ -28,7 +29,7 @@ The grobidmonkey package is an open-source package designed for postprocessing [
 
 ### Installation
 
-```python
+```shell
 pip install grobidmonkey
 ```
 
@@ -44,6 +45,7 @@ outline = monkeyReader.readOutline('path/to/your/paper.pdf.tei.xml')
 # read paper content
 essay = monkeyReader.readEssay('/home/com3dian/Downloads/2308.13067.pdf.tei.xml')
 ```
+For detailed explanantion and tutorial, please check the [Document](https://github.com/com3dian/Grobidmonkey/Document) page. 
 
 ### Contirbution
 
