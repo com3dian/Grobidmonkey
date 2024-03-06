@@ -1,3 +1,4 @@
 build/
 dist/
-pyproject.toml
+src/grobidmonkey.egg-info/
+src/grobidmonkey/__pycache__/
