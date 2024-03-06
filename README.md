@@ -27,6 +27,19 @@ The grobidmonkey package is an open-source package designed for postprocessing [
 pip install grobidmonkey
 ```
 
+### Quick Start
+
+```python
+from grobidmonkey import reader
+monkeyReader = reader.MonkeyReader('monkey') # or 'lxml' or 'x2d'
+
+# read paper outline
+outline = monkeyReader.readOutline('path/to/your/paper.pdf.tei.xml')
+
+# read paper content
+essay = monkeyReader.readEssay('/home/com3dian/Downloads/2308.13067.pdf.tei.xml')
+```
+
 ### Contirbution
 
 We welcome all contributions, whether they involve code, documentation, or testing, feel free to reach out to me via email at com3dian@outlook.com
