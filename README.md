@@ -1,6 +1,7 @@
 
 [![Python](https://img.shields.io/pypi/pyversions/Grobidmonkey)](https://pypi.org/project/grobidmonkey/)
 [![PyPI](https://badge.fury.io/py/grobidmonkey.svg)](https://badge.fury.io/py/grobidmonkey)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/com3dian/Grobidmonkey)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/grobidmonkey.svg?label=Pypi%20downloads)](https://pypi.org/project/grobidmonkey/)
 
 The grobidmonkey package is an open-source package designed for postprocessing [GROBID](https://grobid.readthedocs.io/en/latest/) outputs.
