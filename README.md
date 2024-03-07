@@ -2,6 +2,7 @@
 [![Python](https://img.shields.io/pypi/pyversions/Grobidmonkey)](https://pypi.org/project/grobidmonkey/)
 ![Static Badge](https://img.shields.io/badge/package-grobidmonkey-2D9596)
 [![PyPI](https://badge.fury.io/py/grobidmonkey.svg)](https://badge.fury.io/py/grobidmonkey)
+[![Github Workflow Tests Status](https://github.com/com3dian/Grobidmonkey/workflows/Test/badge.svg)](https://github.com/com3dian/Grobidmonkey/workflows/Test/badge.svg)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/com3dian/Grobidmonkey)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/grobidmonkey.svg?label=Pypi%20downloads)](https://pypi.org/project/grobidmonkey/)
 ![Github Created At](https://img.shields.io/github/created-at/com3dian/Grobidmonkey)
