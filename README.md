@@ -7,6 +7,7 @@
 [![PyPI Downloads](https://img.shields.io/pypi/dm/grobidmonkey.svg?label=Pypi%20downloads)](https://pypi.org/project/grobidmonkey/)
 ![Github Created At](https://img.shields.io/github/created-at/com3dian/Grobidmonkey)
 ![GitHub License](https://img.shields.io/github/license/com3dian/Grobidmonkey)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 The grobidmonkey package is an open-source package designed for postprocessing [GROBID](https://grobid.readthedocs.io/en/latest/) outputs.
 
@@ -95,3 +96,9 @@ $$$$$$$            $$$$$$$$$               $$$$$$$$            $$$$$$$$$$
                     $$$$$$$$$$$$$$$$$$$$$$                                $$$$$$$$$$$$$$$$$$$
                          $$$$$$$$$$$                                           $$$$$$$$$$$$$$
 ```
+
+### About GROBID
+
+GROBID means **G**ene**R**ation **O**f **BI**bliographic **D**ata.
+
+[GROBID](https://github.com/kermitt2/grobid) is a machine learning library for extracting, parsing and re-structuring raw documents such as PDF into structured XML/TEI encoded documents with a particular focus on technical and scientific publications.
