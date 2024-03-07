@@ -29,6 +29,7 @@ The grobidmonkey package is an open-source package designed for postprocessing [
 
 ### Installation
 
+Currently grobidmonkey is only available in PyPI, and can be installed with
 ```shell
 pip install grobidmonkey
 ```
