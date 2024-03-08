@@ -9,6 +9,9 @@ class MonkeyReader():
         self.methodSet = set(['lxml', 'x2d', 'monkey'])
         if method not in self.methodSet:
             raise ValueError('Method has to be one of \'lxml\', \'x2d\', or \'monkey\'')
+        
+    def _checkfile(self, file):
+        pass
 
     def readEssay(self, file):
         if self.method == 'lxml':
@@ -30,7 +33,7 @@ class MonkeyReader():
         self.essay = {key: value for key, value in essay.items() if key is not None}
         return self.essay
     
-    def readOutline(self, file):
+    def readOutline(self, file, showOutline = False):
         if self.method == 'lxml':
             outlineReader = lxmlmethod.lxmlOutlineReader()
             tree = etree.parse(file)
@@ -49,9 +52,9 @@ class MonkeyReader():
 
             outlineTree = monkeymethod.getOutline(lines)
 
-
-        for pre, fill, node in outlineTree:
-            print("%s%s" % (pre, node.name))
+        if showOutline:
+            for pre, fill, node in outlineTree:
+                print("%s%s" % (pre, node.name))
         
         return outlineTree
 

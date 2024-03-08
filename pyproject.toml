@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "grobidmonkey"
+version = "0.0.3"
+authors = [
+  { name="Zehao Lu", email="com3dian@outlook.com" },
+]
+description = "A python package for processing grobid output."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "xmltodict",
+  "lxml",
+  "anytree",
+]
+
+[tool.poetry.dependencies]
+
+
+[project.urls]
+Homepage = "https://github.com/com3dian/grobidmonkey"
+Issues = "https://github.com/com3dian/grobidmonkey/issues"

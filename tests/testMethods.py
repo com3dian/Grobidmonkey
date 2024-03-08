@@ -23,7 +23,7 @@ class TestMethods(unittest.TestCase):
 
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
-        self.testDoc = 'test_resources/paper_process-3.pdf.tei.xml'
+        self.testDoc = 'tests/test_resources/paper_process-3.pdf.tei.xml'
         self.lorem = '''
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, 
         vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida 
