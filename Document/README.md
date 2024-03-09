@@ -1,4 +1,4 @@
-### Grobidmonkey Reader
+### `grobidmonkey.MonkeyReader`
 
 #### Overview
 
@@ -33,4 +33,7 @@ The purpose of the MonkeyReader class is to extract essays and outlines from XML
     - `showOutline` (bool): A flag indicating whether to print the outline structure. Defaults to False.
 
   Returns: A [`anytree.RenderTree`](https://anytree.readthedocs.io/en/stable/api/anytree.render.html#anytree.render.RenderTree) representation of the document outline.
-  
+
+#### Tutorial
+
+You can check our [tutorial notebook](https://github.com/com3dian/Grobidmonkey/blob/master/Document/tutorial.ipynb) for an example use.

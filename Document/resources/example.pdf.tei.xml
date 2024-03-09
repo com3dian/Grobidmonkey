@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Influential Node Detection on Graph on Event Sequence</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher>Springer Nature Switzerland</publisher>
+				<availability status="unknown">
+					<licence/>
+				</availability>
+				<date type="published" when="2024">2024</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Zehao</forename><surname>Lu</surname></persName>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Shihan</forename><surname>Wang</surname></persName>
+							<email>s.wang2@uu.nl</email>
+						</author>
+						<author>
+							<persName><forename type="first">Xiao-Long</forename><surname>Ren</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Rodrigo</forename><surname>Costas</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tamara</forename><surname>Metze</surname></persName>
+						</author>
+						<title level="a" type="main">Influential Node Detection on Graph on Event Sequence</title>
+					</analytic>
+					<monogr>
+						<title level="m">Complex Networks &amp; Their Applications XII</title>
+						<idno type="ISSN">1860-949X</idno>
+						<idno type="eISSN">1860-9503</idno>
+						<imprint>
+							<publisher>Springer Nature Switzerland</publisher>
+							<biblScope unit="page" from="147" to="158"/>
+							<date type="published" when="2024"/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">E4D8C535777083EE938564CAA8E266BB</idno>
+					<idno type="DOI">10.1007/978-3-031-53472-0_13</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.1-SNAPSHOT" ident="GROBID" when="2024-03-09T14:37+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Influential Node Detection</term>
+					<term>Dynamics of Network</term>
+					<term>Non-epidemic Spreading</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Numerous research efforts have centered on identifying the most influential players in networked social systems. This problem is immensely crucial in the research of complex networks. Most existing techniques either model social dynamics on static networks only and ignore the underlying time-serial nature or model the social interactions as temporal edges without considering the influential relationship between them. In this paper, we propose a novel perspective of modeling social interaction data as the graph on event sequence, as well as the Soft K-Shell algorithm that analyzes not only the network's local and global structural aspects, but also the underlying spreading dynamics. The extensive experiments validated the efficiency and feasibility of our method in various social networks from real world data. To the best of our knowledge, this work is the first of its kind.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Real-world networks exhibit high complexity as there are a large number and variety of nodes, interactions, or relationships. Therefore, modeling the spreading phenomenon (which could be either informative or physical) is difficult yet critical in a variety of fields such as infectious disease research <ref type="bibr" target="#b0">[1]</ref>, social media study <ref type="bibr" target="#b1">[2]</ref>, communication study <ref type="bibr" target="#b2">[3]</ref>. The most intuitive way to find those opinion leaders in a network is to rank the nodes according to their influence. Numerous studies have been done to identify opinion leaders in various complex networks <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b4">5]</ref>. The majority of research on opinion leader detection in complex networks has assumed that the network is a static model, in which each node corresponds to an individual and the edges represent their long-term relationships.</p><p>However, many real-world social systems cannot be accurately depicted using static graphs due to their inability to account for temporal fluctuations in interactions and assume that the graph's structure remains unchanged <ref type="bibr" target="#b5">[6]</ref>. The existing temporal network models mainly constructed network models by adding timerespecting edges on static models, therefore being able to model edge dissolving network phenomena.</p><p>Although the already existing network models are able to describe some network spreading mechanisms, these models overlook the relevant causal relationships within a sequence of events. Additionally, they fail to provide a quantification of influence. In some non-epidemic spreading situations (e.g. information spreading), people actively make decisions or react to received information rather than being passively affected <ref type="bibr" target="#b6">[7]</ref>. In this case, the process of one person influencing another becomes a 'two-step' process: an actor first posts a message or commits a change, and another network member then reacts by doing the same (like posting or committing). The causal relationship here hinges on the chain of events, not just the network of individuals, as these active participants react to content or changes rather than just the sender <ref type="bibr" target="#b7">[8]</ref>. These responsive actions or interactions can be summarized as 'events' in a non-epidemic network. See the example in Fig. <ref type="figure" target="#fig_0">1</ref>. In a texting network, the chain of messages is usually highly informative and has long-distance influences. Thus, sending the message can be conceptualized as an event. When A sends a message to B saying 'shall we (A,B,C) have a dinner this weekend? ' (first event), and B forward this to C afterward for confirmation (second event). Then, C texts A with 'Yes, Sunday is great! ' (third event). In this example, the third event is obviously a direct result of the first event, in other words, the first event influences the third event. However, the influence and chain-like relationships will not be captured in the current static or temporal network models (demonstrated in Fig. <ref type="figure" target="#fig_0">1</ref> left), as those models can only treat individuals as nodes and interactions as edges, while the relationship between edges (events) is usually ignored <ref type="bibr" target="#b5">[6]</ref>.</p><p>To fix the mentioned gap, this study offers a new perspective to model the graph on event sequence and to detect influential nodes in dynamic networks. In this model, we focus on social networks constructed with chains of informative events, and the influence of each social opinion is precisely measured by applying the Hawkes process model <ref type="bibr" target="#b8">[9]</ref>, which is a stochastic processes model that describes the progression of events through time, wherein the occurrence of prior events can influence the probability of future events. Furthermore, we propose a novel opinion leader mining method, the Soft K-shell, which functions on the graph on event sequence. The Soft K-shell algorithm applies the Hawkes process model on influence measurement and is able to use a variety of node properties (both topological and contextual) to find influential nodes. We conduct experiments on networks of different sizes and types to assess the Soft K-Shell's performance. The experimental results show that the proposed algorithm is feasible to perform better than the current benchmark algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Proposed Method</head><p>This section presents the proposed model (the graph on event sequence), and a related novel influential node detection algorithm (namely Soft K-shell).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Graph on Event Sequence</head><p>This research proposes a new type of social network graph model: the graph on event sequence. To make it clearer, the explanation of this term is given in this subsection. Unpack:</p><p>1: The graph is a directed structure (V, E) made of nodes V and edges E. 2: The event sequence is a sequence of interacting nodes {v i } in successive order. The temporal feature of the informatic flow is stored in the event sequence. The event sequence can be generated according to various situations. In the Fig. <ref type="figure">2</ref> example, to identify influential social media users we may define the top right event sequence, whereas the bottom right event sequence is more suitable for studying content of messages (e.g. influential scientific papers) in the social media community. 3: The term 'on' here simply means that the graph itself is extracted from the event sequence.</p><p>Why 'Graph on Event Sequence'? One major disadvantage of the static graph model for studying social media is that they do not take the temporal features of information diffusion into account. That is to say, all interactions within the populations are considered equally in a static model, even if they are not. On the other hand, existing temporal models mainly consider network Fig. <ref type="figure">2</ref>. A example of a graph on event sequence. The left plot illustrates an online social media screenshot, the colored circles (or 'bulbs') symbolize the network elements connected by the topological graph. Each 'bulb' (node) represents a post on social media. The extracted graph is shown in the middle, where each edge is an interaction between posts (e.g. reply or retweet). Interestingly, the same graph can be extracted from different event sequences (the right plots). For example, the top event sequences represent the posts from three users, where each user's posts are lined on the same arrow and the interaction between posts is represented by the dotted arrow. Here, the same contour color means the same users, while the filled color suggests the topic that the post is concerning. On the other hand, the bottom event sequences indicate the posts concerning two topics. In this event sequence, the contour color shows the topic and the filled color shows the publisher (e.g. Twitter user).</p><p>models only consisting of individuals while failing to construct a network for events. The graph on event sequence model provides an approach of combining the topological and temporal features for influential measurement to address the above issues, the graph on event sequence modeled the underlying dynamical process of events chain as a Hawkes process. Therefore, it is able to accurately describe the impact of each network event on its respondents. The graph on the event sequence model primarily serves as a content impact mining method, but it can also measure an individual's influence within a social network by summing the influences of events in a sequence, offering versatility for analyzing the impact of different content attributes, such as ranking influential journals based on their overall influence in a citation network.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Hawkes Process for Influence Measurement</head><p>The Hawkes process <ref type="bibr" target="#b8">[9]</ref> is a mathematical model used in statistics and stochastic processes to describe the probability of occurrence of events {v i } over time using an intensity function. Hawkes processes is widely used in the area of influence measurement of non-epidemic spreading process <ref type="bibr" target="#b9">[10]</ref><ref type="bibr" target="#b10">[11]</ref><ref type="bibr" target="#b11">[12]</ref><ref type="bibr" target="#b12">[13]</ref>. The classic Hawkes Process is a counting process that models 'self-excited' events over a time period. In this research, a typical type of the multivariate Hawkes processes, the topological Haweks process model is applied to measure the influence of receiving information on reaction <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b14">15]</ref>. We propose to measure the impact of each network event on its respondents using the Hawkes process. </p><formula xml:id="formula_0">Definition 1. A graph on event sequence is a direct graph G = (V, E) that each node v ∈ V is</formula><formula xml:id="formula_1">W (e) = e -β(T (u)-T (v))</formula><p>where u, v are the nodes connected by edge e = v → u, T (v) represents the timestamp when v occurred, and β is the scale parameter.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lemma 1. Each connected component of the graph on event sequence is an acyclic graph.</head><p>Proof. For any path in the graph on event sequence, the timestamp of successor nodes is later than their precursor's. Therefore if there is a cycle in any connected component, a time machine is invented.</p><formula xml:id="formula_2">Theorem 1. Each connected component of the graph G = (E, V ) is a feed- forward network.</formula><p>For each node v in the graph, its direct successor nodes S(v) is {u|u ∈ V, (v, u) ∈ E}, and the total influence of node v on its neighbor is,</p><formula xml:id="formula_3">I(v) = u∈S(v) α(u)e -β(T (u)-T (v))<label>(1)</label></formula><p>Proof. By lemma 1, we have that each connected component of the graph G = (E, V ) is directed and acyclic, thus, it is a feed-forward network. For each u ∈ S(v), the influence of v on u is α(u)e -βT (u)-T (v) By summing up those influences we have the above result. Note that the term α only depends on the property of node u, therefore it can be estimated by various machine learning or statistical algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lemma 2. For any two nodes v and u, the influence of</head><formula xml:id="formula_4">v on u is m × α(u)e -β(T (u)-T (v)) if T (v) ≤ T (u)</formula><p>and u, v both belong to a same connected component of G, otherwise the influence is 0. Here m is the number of distinct paths from v to u. If we do not consider any node properties then α is set to 1.</p><p>Proof. Suppose u and v are below to same connected component of G, by Lemme 1, this connected component is an acyclic directed network. Thus there are m paths from v to u and none from u to v. Select one chain p, let {w i } denote the nodes on one of those chains from v to u as follows,</p><formula xml:id="formula_5">p : v → w 1 → w 2 → ... → w n → u (2)</formula><p>By the definition of intensity function and formula (1), there is,</p><formula xml:id="formula_6">I p u (v) = α(u)e -β(T (u)-T (v))</formula><p>If there are m different chains from v to u, the summed influence should be,</p><formula xml:id="formula_7">I u (v) = p∈P (v,u) I p u (v) = p∈P (v,u) α(u)e -β(T (u)-T (v)) = mα(u)e -β(T (u)-T (v))</formula><p>(3) where P (v, u) represents the set of paths from v to u. The influence of a node v on itself is α(v)e -β(T (v)-T (v)) = α(v). If u, v do not belongs to a same connected component of G, I u (v) is naturally 0.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Theorem 2. The overall influence of a node v in the graph can be obtained by directly computing its accumulated influence, which is defined as</head><formula xml:id="formula_8">A(v) = α(v) + u∈S(v) e -β(T (u)-T (v) A(u) (<label>4</label></formula><formula xml:id="formula_9">)</formula><p>where S(v) is the set of direct successors of v. Note that m is not shown in formula ( <ref type="formula" target="#formula_11">5</ref>) as there will only exist one direct path (an edge) for each neighbouring (u, v) pair.</p><p>Let S (v) denote the set of successors of v in G. By Lemma 2, there is</p><formula xml:id="formula_10">I p w (v) = α(w)e -β(T (w)-T (v)) and, A(v) = w∈S (v) p∈{P (v,w)} I p w (v)</formula><p>where p(v, w) denotes a direct path from v to w. Therefore,</p><formula xml:id="formula_11">A(v) = w∈S (v) p∈{P (v,w)} α(w)e -β(T (w)-T (v)) = α(v) + w =v,w∈S (v) p∈P (v,w) α(w)e -β(T (w)-T (v))<label>(5)</label></formula><p>The summed form in (5) can also be written as</p><formula xml:id="formula_12">w =v,w∈S (v) p∈P (v,w) • = p∈P (v,•)</formula><p>• where P (v, •) represents all paths in G that start from v. Further, Note that any path p in G must include at least one node u which is a direct successor of v, one can split P (v, •) into u∈S(v) P (u, •), where u is the closest node to v on path p. And for u in S(v),</p><formula xml:id="formula_13">e -β(T (w)-T (v)) = e -β(T (w)-T (u)) e -β(T (u)-T (v))<label>(6)</label></formula><p>Therefore, the summed form in ( <ref type="formula" target="#formula_11">5</ref>) is equal to</p><formula xml:id="formula_14">w p • = p∈P (v,•) α(w)e -βT (w)-T (v) = u∈S(v) e -β(T (u)-T (v)) A(u)<label>(7)</label></formula><p>By combining formula ( <ref type="formula" target="#formula_11">5</ref>) and ( <ref type="formula" target="#formula_14">7</ref>) there is,</p><formula xml:id="formula_15">A(v) = α(v) + u∈S(v)</formula><p>e -β(T (u)-T (v)) A(u) (8)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Soft K-Shell Algorithm</head><p>Accordingly, we propose a novel method, namely the Soft k-shell algorithm, that considers the topological Hawkes process of interaction. The proposed method addresses the task of detecting influential nodes by assessing the global influence of individual nodes in the graph using the Hawkes process and subsequently ranking them based on their overall influence<ref type="foot" target="#foot_0">1</ref> . The algorithm is executed as follows: first, if the node attribute is used, each node v's ranking is initially set to α(v), as it is proved by Theorem 2, the influence of a node v on itself is α(v). Otherwise, α(v) = 1. It is advised that α(v) be set to a value between 0 and 1. Second, the global influence of node v whose direct successor u has a 0 degree ({u|u ∈ V, (v, u) ∈ E, degree(u) = 0}) is calculated recursively by adding its self influence (which is initialized as α) and its influence over u, which is e -β(T (u)-T (v)) A(u). After performing this computation, node u will be permanently removed from the graph, and A(u) is the final result of u's global influence. By repeatedly removing zero degree nodes us and updating the global influence of their predecessor vs, the graph G itself is also shrinking. As the graph is acyclic, there will always be new zero-out-degree nodes until all nodes are removed. We name this method the Soft K-shell algorithm. Two versions of the Soft K-Shell algorithm are considered here. If node-property is true then the property of nodes is used as α(v) <ref type="foot" target="#foot_1">2</ref> , otherwise α(v) is set to 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Experiments and Results</head><p>This study compares the performance of our method with four other methods for detecting opinion leaders in dynamic social networks. To evaluate the feasibility and generalizability of our method, six real world data sets of various types are used. Four of them are a collection of long-term Dutch tweets containing Coronavirus tags from February 2020 to January 2021 <ref type="bibr" target="#b15">[16]</ref>, which are split into four different data sets (NCF(reply), NCF(quote), NCF(retweet), NCF(together)) depending on their interaction type. The fifth data set (NCJ) contains shortterm Dutch tweets related to the COVID-19 pandemic (three hours around a pandemic press conference on 14th January 2022) <ref type="bibr" target="#b16">[17]</ref>, while the sixth data set (DBLP V1) is the first version of the DBLP dataset (citation network) <ref type="bibr" target="#b17">[18]</ref>. The specifications of the data sets utilized in the studies and the source code can be found in the paper's repository.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">SIR Simulation Results</head><p>In this study, we compare the experimental results of our method with those of four other state-of-the-art algorithms, utilizing the Susceptible-Infected-Removed (SIR) <ref type="bibr" target="#b18">[19]</ref> simulation infection rate and computational complexity.</p><p>The SIR model is a widely used framework for simulating the diffusion of information within networks. In scenarios where opinion leaders are designated as the initial set of infected nodes, upon achieving convergence, this model yields an infection rate that serves as a quantitative measure of the influence exerted by these initial opinion leaders throughout the entire information diffusion process.</p><p>The transmission rate τ of each edge is 0.98 and the recovery rate γ of each node is 0.02. In every simulation, the top 5% ranked nodes were selected and infected initially. The simulations were conducted for 50 rounds. During our experiments, we used the number of followers as α for the NCF/NCJ datasets and citation numbers as α for the DBLP dataset.</p><p>(a) The SIR results from a larger scale. (b) The SIR results from a smaller scale.</p><p>Fig. <ref type="figure">3</ref>. Following the SIR model, the infection rates of various approaches on the NCF(together) network are presented (with different zoom scales). The x-axis shows the number of the initial opinion leaders (seed set), while the y-axis shows the final proportion of infection (in percentage). All comparable methods use the same size of opinion leaders' set as the seed set of SIR. The plot shows that the proposed method, Soft K-Shell, outperforms all other methods. The final SIR infection rate does not significantly differ between the two versions of the Soft K-Shell (with and without node properties). MMD and RIPS also perform well.</p><p>The results of Soft K-Shell (SKS) and several other state-of-the-art methods in the literature were used to validate the proposed model and algorithm. Leader-Rank algorithm (LR) <ref type="bibr" target="#b19">[20]</ref>, mixed degree decomposition (MDD) <ref type="bibr" target="#b20">[21]</ref>, k-shell iteration factor (ksIF) <ref type="bibr" target="#b21">[22]</ref>, and Randomized Influence Paths Selection (RIPS) <ref type="bibr" target="#b22">[23]</ref> are selected as the baseline. The first three algorithms are widely used baselines in opinion leader mining tasks, while the RIPS is the state-of-art algorithm according to its results <ref type="bibr" target="#b22">[23]</ref>. The parameters used in the following experiment are suggested by its authors.</p><p>In particular, four versions of the RIPS algorithm are used for comparison. Two versions consider the Hawkes intensity e -β(T (u)-T (v) as edge weight while the other two use equal weight for all edges. Additionally, we consider two versions of the Soft K-Shell algorithm in the experiments (with node property or not). Figures <ref type="figure">3a</ref> and<ref type="figure">4</ref> depict the SIR model infection rates on the NCF(together) Fig. <ref type="figure">4</ref>. In the NCJ dataset, the Soft K-Shell algorithm with node property achieves the highest infection rate, while the K-Shell iterative factor algorithm also performs well. Notably, the performance between the two versions of Soft K-Shell differs a lot, indicating the significant impact of node property in enhancing algorithm performance. This enhancement can be attributed to the characteristics of the NCJ dataset, which mainly consists of short-term Twitter interactions. In short-term information diffusion, users with a larger follower count exert a more significant influence. This phenomenon enhances the advantage of the Soft K-Shell algorithm with respect to its feasibility in combining node properties.</p><p>data set and the NCJ data set respectively. To better show the subtle difference in Fig. <ref type="figure">3a</ref>, we also present plots of infection rates from the smaller scale in Fig. <ref type="figure">3b</ref>.</p><p>Table <ref type="table" target="#tab_1">1</ref> presents the highest infection rates obtained through SIR simulations across all six datasets, considering various algorithm settings. Our proposed algorithm consistently achieved the highest infection rate across datasets of varying sizes and social interactions. This demonstrates the feasibility and generalizability of our opinion leader mining method. </p><formula xml:id="formula_16">-Shell O(|V | 2 ) MDD O(|V | 2 ) ksIF O(|V | 2 + |E|) RIPS O(|V |log(|V |) + 2|E|) Soft K-Shell O(|V | 2 )</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Computational Complexity Results</head><p>In this paper, we also assess the proposed method based on the computational complexity. The time complexity of five algorithms is listed in </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Soft Shell Decomposition</head><p>Besides the quantitative results, we had another interesting discovery even though the Soft K-Shell algorithm does not compute a 'hard' decomposition of the network, its computed node ranking follows a multimodal distribution.</p><p>As demonstrated in Fig. <ref type="figure" target="#fig_1">5</ref>, the scatter plot of the NCF(together) data set has four 'shells' which together can be described as a soft shell decomposition. This is also the inspiration for naming this algorithm. The four 'shells' from the inside out each represent one type of posts in the NCF(together) dataset. The most centered shell (purple) represents the most influential tweets; while the second shell (deep blue) represents the posts that have a small range impact in the 'local' social network; the third shell (green) represents the most ordinary posts; the fourth shell (yellow) represents the 'dead' posts that are rarely noticed by any other people. It can be concluded that the Soft K-shell ranking result is also able to reveal the soft shell nature of a network. The above soft shell decomposition result not only gives the ranking of posts regarding their influence, but also gives a distribution of their influence. With the help of that distribution, a more specific community opinion study on the purple shell can be carried out, since the purple shell is highly representative of the community and is much smaller compared to the entire network. As a result, the soft shell decomposition can immensely benefit the analysis of social media platforms' processes for forming opinions based on their content.  v) , where rank(v) is ranging from 1 to +∞. The coreness trait is also seen in the result of Soft K-Shell algorithm, despite the fact that it does not use the original K-Shell technique.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">Conclusion</head><p>With the increasing popularity of social networks, resolving essential problems about these networks, such as opinion leader detection, has gained a lot of interest. However, most of the existing static and temporal methods fail to explain the underlying dynamic of non-epidemic spreading process in the networks. Therefore, a new method that considers the Hawkes process of information flow to combine the topological and temporal features for influential measurement, is proposed in this paper. The proposed model outperforms the state-of-the-art model by a significant margin while keeping a competitive time complexity. In future work, more theoretical study shall be accomplished on finding the scale parameter β and the node's property α. Also, we plan to investigate more into using the time serial structure of the Hawkes process to forecast social network dynamics and its impact on public opinion.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Fig. 1 .</head><label>1</label><figDesc>Fig. 1. A texting network example. The temporal model is not able to capture the affection relationship E1 → E2 → E3, as the adjacent edges do not necessarily have a direct affection relationship in a temporal graph.</figDesc><graphic coords="2,56.31,303.59,311.38,118.87" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 5 .</head><label>5</label><figDesc>Fig.5. The shell decomposition or the coreness decomposition of the NCF(together) data set. Each data point is a rank of a node in NCF(together)(which representing a post on Twitter), which has been scaled by exponential function e1-rank(v) , where rank(v) is ranging from 1 to +∞. The coreness trait is also seen in the result of Soft K-Shell algorithm, despite the fact that it does not use the original K-Shell technique.</figDesc><graphic coords="11,139.98,53.69,172.96,111.01" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head/><label/><figDesc/><graphic coords="4,41.79,54.35,340.33,153.37" type="bitmap"/></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head/><label/><figDesc>an element in an event sequence, a directed edge e ∈ E represents the interaction relationship between the two nodes. Given a threshold R, a graph G = (V, E) and an influential function I = I(v) where v is the node and I(v) is the rank, a node v ∈ V is called opinion leader if and only if it is in the top R nodes among the influentially ranking list that is sorted by I(v).</figDesc><table><row><cell>Definition 2. Definition 3. The weight of each edge is defined as</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>The infection rate after SIR model reached the convergence of different methods results. Top 5% nodes found by each algorithm are used in the SIR model. The highest score on each data set is bolded. The Soft K-shell algorithm outperforms every other model.</figDesc><table><row><cell>Datasets</cell><cell>LR</cell><cell>MMD Ksif RIPS SKS SKS with node property</cell></row><row><cell>NCF(reply)</cell><cell cols="2">0.048 0.087 0.102 0.092 0.133 0.133</cell></row><row><cell>NCF(quote)</cell><cell cols="2">0.155 0.240 0.199 0.212 0.250 0.250</cell></row><row><cell cols="3">NCF(retweet) 0.050 0.481 0.373 0.469 0.490 0.488</cell></row><row><cell cols="3">NCF(together) 0.050 0.481 0.373 0.469 0.489 0.490</cell></row><row><cell>NCJ</cell><cell cols="2">0.056 0.067 0.067 0.076 0.050 0.108</cell></row><row><cell>DBLP V1</cell><cell cols="2">0.100 0.164 0.140 0.181 0.198 0.210</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 .</head><label>2</label><figDesc>Computational complexity of different methods</figDesc><table><row><cell>Algorithms Complexity</cell></row><row><cell>K</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 .</head><label>2</label><figDesc>The Soft K-shell algorithm has the same time complexity as the K-shell algorithm. In terms of the number of nodes |V |, RIPS appears to be the most effective algorithm because its highest ordered component is |V |log(|V |), whereas other algorithms have the term |V | 2 . However, in many real world networks, the amount of edges |E| has the same order as |V | 2 . Additionally, because the RIPS technique uses a Monte-Carlo-based methodology, the constant coefficients in the asymptotic complexity term are significantly larger than those in the other four methods.</figDesc><table/></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1" xml:id="foot_0"><p>A pseudocode of the proposed Soft K-shell algorithm could be found in this paper's repository, https://github.com/com3dian/SoftKShell.</p></note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2" xml:id="foot_1"><p>For the soft k-shell model, the parameter of node properties α is user-defined. In our conceptual framework, this value is assumed to be calculated using other machine learning techniques and given as the prior knowledge. Consequently, we do not delve into the methodologies for obtaining this parameter in the paper.</p></note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The human disease network</title>
+		<author>
+			<persName><forename type="first">K.-I</forename><surname>Goh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">E</forename><surname>Cusick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Valle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Childs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Vidal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A.-L</forename><surname>Barabási</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Natl. Acad. Sci. USA</title>
+		<imprint>
+			<biblScope unit="volume">104</biblScope>
+			<biblScope unit="page" from="8685" to="8690"/>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Modelling dynamical processes in complex socio-technical systems</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vespignani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nat. Phys</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="32" to="39"/>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Studying online social networks</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Garton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Haythornthwaite</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wellman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Comput.-Mediat. Commun</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+	<note>JCMC</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Opinion leader detection: a methodological review</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M H</forename><surname>Bamakan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Nurgaliev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><surname>Qu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Expert Syst. Appl</title>
+		<imprint>
+			<biblScope unit="volume">115</biblScope>
+			<biblScope unit="page" from="200" to="222"/>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Vital nodes identification in complex networks</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lü</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X.-L</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q.-M</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rep</title>
+		<imprint>
+			<biblScope unit="volume">650</biblScope>
+			<biblScope unit="page" from="1" to="63"/>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Temporal networks</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Holme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Saramäki</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rep</title>
+		<editor>
+			<persName><forename type="first">Z</forename><surname>Lu</surname></persName>
+		</editor>
+		<imprint>
+			<biblScope unit="volume">519</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="97" to="125"/>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note>Temporal Networks</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Spreading in online social networks: the role of social reinforcement</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lü</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Zhao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. E</title>
+		<imprint>
+			<biblScope unit="volume">88</biblScope>
+			<biblScope unit="page">12818</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">V</forename><surname>Inwagen</surname></persName>
+		</author>
+		<title level="m">An Essay on Free Will</title>
+		<meeting><address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Oxford University Press</publisher>
+			<date type="published" when="1983">1983</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Spectra of some self-exciting and mutually exciting point processes</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Hawkes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Biometrika</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="83" to="90"/>
+			<date type="published" when="1971">1971</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">TiDeH: Time-dependent Hawkes process for predicting retweet dynamics</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kobayashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Lambiotte</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Int. AAAI Conf. Weblogs Soc. Media</title>
+		<meeting>Int. AAAI Conf. Weblogs Soc. Media</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="191" to="200"/>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Hawkes point processes for social media analytics</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">H</forename><surname>Zadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sharda</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-11575-7_5</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-11575-75"/>
+	</analytic>
+	<monogr>
+		<title level="m">Reshaping Society through Analytics, Collaboration, and Decision Support</title>
+		<editor>
+			<persName><forename type="first">L</forename><forename type="middle">S</forename><surname>Iyer</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><forename type="middle">J</forename><surname>Power</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="51" to="66"/>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Hawkes process for understanding the influence of pathogenic social media accounts</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Alvari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shakarian</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2019 2nd International Conference on Data Intelligence and Security (ICDIS)</title>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="36" to="42"/>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Quantifying reflexivity in financial markets: toward a prediction of flash crashes</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Filimonov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sornette</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Rev. E</title>
+		<imprint>
+			<biblScope unit="volume">85</biblScope>
+			<biblScope unit="page">56108</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">THP: topological hawkes processes for learning granger causality on event sequences</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Qiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2105.10884</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Multivariate hawkes processes: an application to financial data</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Embrechts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Liniger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Appl. Probab</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">A</biblScope>
+			<biblScope unit="page" from="367" to="378"/>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A scientometric overview of cord-19</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Colavizza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Costas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">A</forename><surname>Traag</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">J</forename><surname>Van Eck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Van Leeuwen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Waltman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">244839</biblScope>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Schraagen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">T K</forename><surname>Sang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Dastani</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2006.07283</idno>
+		<title level="m">Dutch general public reaction on governmental COVID-19 measures and announcements in twitter data</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The network data repository with interactive graph analytics and visualization</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Rossi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">K</forename><surname>Ahmed</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">An application of the theory of probabilities to the study of a priori pathometry.-Part I</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Ross</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Roy. Soc. Lond. A</title>
+		<imprint>
+			<biblScope unit="volume">92</biblScope>
+			<biblScope unit="issue">638</biblScope>
+			<biblScope unit="page" from="204" to="230"/>
+			<date type="published" when="1916">1916</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Leaders in social networks, the delicious case</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Lü</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y.-C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">H</forename><surname>Yeung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page">21202</biblScope>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Ranking spreaders by decomposing complex networks</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C.-J</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. Lett. A</title>
+		<imprint>
+			<biblScope unit="volume">377</biblScope>
+			<biblScope unit="issue">14</biblScope>
+			<biblScope unit="page" from="1031" to="1035"/>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Fast ranking influential nodes in complex networks using a K-shell iteration factor</title>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Xi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Du</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Phys. A: Stat. Mech. Appl</title>
+		<imprint>
+			<biblScope unit="volume">461</biblScope>
+			<biblScope unit="page" from="171" to="181"/>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">A</forename><surname>Rezaei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jalili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Khayyam</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2112.02927</idno>
+		<title level="m">Influential node ranking in complex networks using a randomized dynamics-sensitive approach</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

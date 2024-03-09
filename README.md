@@ -44,16 +44,16 @@ from grobidmonkey import reader
 monkeyReader = reader.MonkeyReader('monkey') # or 'lxml' or 'x2d'
 
 # read paper outline
-outline = monkeyReader.readOutline('path/to/your/paper.pdf.tei.xml')
+outline = monkeyReader.readOutline('/path/to/your/paper.pdf.tei.xml')
 
 # read paper content
-essay = monkeyReader.readEssay('/home/com3dian/Downloads/2308.13067.pdf.tei.xml')
+essay = monkeyReader.readEssay('/path/to/your/paper.pdf.tei.xml')
 ```
-For detailed explanantion and tutorial, please check the [Document](https://github.com/com3dian/Grobidmonkey/Document) page. 
+For detailed explanantion and tutorial, please check the [Document](https://github.com/com3dian/Grobidmonkey/tree/master/Document) page. 
 
 ### Contirbution
 
-We welcome all contributions, whether they involve code, documentation, or testing, feel free to reach out to me via email at com3dian@outlook.com
+We welcome all contributions, whether they involve code, documentation, or testing, feel free to reach out to me via email at com3dian@outlook.com.
 
 
 ### Icon
@@ -102,3 +102,5 @@ $$$$$$$            $$$$$$$$$               $$$$$$$$            $$$$$$$$$$
 GROBID means **G**ene**R**ation **O**f **BI**bliographic **D**ata.
 
 [GROBID](https://github.com/kermitt2/grobid) is a machine learning library for extracting, parsing and re-structuring raw documents such as PDF into structured XML/TEI encoded documents with a particular focus on technical and scientific publications.
+
+You can also try the [GROBID web app](https://kermitt2-grobid.hf.space/) with your paper.
