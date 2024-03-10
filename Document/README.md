@@ -34,6 +34,28 @@ The purpose of the MonkeyReader class is to extract essays and outlines from XML
 
   Returns: A [`anytree.RenderTree`](https://anytree.readthedocs.io/en/stable/api/anytree.render.html#anytree.render.RenderTree) representation of the document outline.
 
+#### Example
+
+```python
+>>> from grobidmonkey import reader
+>>> monkeyReader = reader.MonkeyReader('monkey') # or 'lxml' or 'x2d'
+
+>>> # read paper outline
+>>> monkeyReader.readOutline('/path/to/your/paper.pdf.tei.xml', True)
+Article
+├── 1 Introduction
+├── 2 Method
+│   ├── 2.1 ...
+...
+└── 4 Conclusion
+
+>>> # read paper content
+>>> monkeyReader.readEssay('/path/to/your/paper.pdf.tei.xml')
+{'Abstract': ['...'],
+ 'Introduction': ['...', ...],
+ ...}
+```
+
 #### Tutorial
 
 You can check our [tutorial notebook](https://github.com/com3dian/Grobidmonkey/blob/master/Document/tutorial.ipynb) for an example use.

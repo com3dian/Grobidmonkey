@@ -9,7 +9,13 @@
 ![GitHub License](https://img.shields.io/github/license/com3dian/Grobidmonkey)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-The grobidmonkey package is an open-source package designed for postprocessing [GROBID](https://grobid.readthedocs.io/en/latest/) outputs.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/com3dian/Grobidmonkey/master/Document/resources/noun-chimpanzee-4933957(1).png" alt="Chimpanzee" width="200" />
+  <p>
+    Grobidmonkey is an light-weight python package designed for postprocessing <a href="https://grobid.readthedocs.io/en/latest/">GROBID</a> outputs.
+  </p>
+</div>
 
 - Website: https://github.com/com3dian/Grobidmonkey
 
@@ -54,48 +60,6 @@ For detailed explanantion and tutorial, please check the [Document](https://gith
 ### Contirbution
 
 We welcome all contributions, whether they involve code, documentation, or testing, feel free to reach out to me via email at com3dian@outlook.com.
-
-
-### Icon
-
-Gorbidmonkey's icon is a walking monkey.
-
-```
-                  $$                                                                   
-           $$$$$$$$$$$$$$$$$$                              $$$$$$
-       $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$                    $$$$$$$$$$                       
-    $$$$$$$$                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$             
-   $$$$$$                          $$$$$$$$$$$$$$$$$$$$$$$$$$$           
-  $$$$$$                                   $$$$$$$$$$$$                             
- $$$$$$                                                              
- $$$$$$                                                                   
- $$$$$$                                                                             
- $$$$$$                                                                    GROBIDMONKEY
- $$$$$$$                           $$$$$$$$$$$$$$$                     $$$$$$$$$$$$$$$$$$$$
- $$$$$$$                   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$
-  $$$$$$$$          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    $$$$$   $$$$$$$$     $$
-    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  $$$$$$      $$  $
-      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$          $$
-          $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$
-              $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-               $$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$$$
-                 $$$$$$$$$$$$$$$$    $$$$$$$$$$$$$  $$$$$$$$$$$$$$$$$$$         $$$$$$$
-                  $$$$$$$$$$$$$$$       $$$$$$$$$  $$$$$$$$$$$$$$$$$  
-            $$$$$  $$$$$$$$$$$$$$                 $$$$$$$$$$$$$$$$   $$$$
-        $$$$$$$$$$$  $$$$$$$$$$$$               $$$$$$$$$$$$$$$$  $$$$$$$
-    $$$$$$$$$$$$$$$$ $$$$$$$$$$$$             $$$$$$$$$$$$$$   $$$$$$$$$$
- $$$$$$$$$$$$$$$$$  $$$$$$$$$$$             $$$$$$$$$$$$$    $$$$$$$$$$$
-$$$$$$$$$$$        $$$$$$$$$$              $$$$$$$$$$        $$$$$$$$$$$
-$$$$$$$            $$$$$$$$$               $$$$$$$$            $$$$$$$$$$
- $$$$$            $$$$$$$$$                $$$$$$$              $$$$$$$$$
- $$$$$$          $$$$$$$$                 $$$$$$$$                $$$$$$$$$
- $$$$$$          $$$$$$$$                $$$$$$$$                 $$$$$$$$$
- $$$$$$          $$$$$$$$              $$$$$$$$$                    $$$$$$$$
- $$$$$           $$$$$$$$$            $$$$$$$$$                       $$$$$$$$
-                  $$$$$$$$$$        $$$$$$$$$                           $$$$$$$$
-                    $$$$$$$$$$$$$$$$$$$$$$                                $$$$$$$$$$$$$$$$$$$
-                         $$$$$$$$$$$                                           $$$$$$$$$$$$$$
-```
 
 ### About GROBID
 
